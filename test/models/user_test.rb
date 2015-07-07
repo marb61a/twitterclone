@@ -91,6 +91,7 @@ class UserTest < ActiveSupport::TestCase
         michael = users(:michael)
         archer  = users(:archer)
         lana    = users(:lana)
+        
         # Posts from followed user
         lana.microposts.each do |post_following|
           assert michael.feed.include?(post_following)

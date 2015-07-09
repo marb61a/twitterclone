@@ -42,13 +42,13 @@ class User < ActiveRecord::Base
         BCrypt::Password.new(digest).is_password?(token)
     end
     
-    # Activates an account.
+    # Activates user account.
     def activate
         update_attribute(:activated,    true)
         update_attribute(:activated_at, Time.zone.now)
     end
 
-    # Sends activation email.
+    # Sends user an activation email.
     def send_activation_email
         UserMailer.account_activation(self).deliver_now
     end
@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
         update_attribute(:reset_sent_at, Time.zone.now)
     end
 
-    # Sends password reset email.
+    # Sends user a password reset email.
     def send_password_reset_email
         UserMailer.password_reset(self).deliver_now
     end
@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
         reset_sent_at < 2.hours.ago
     end
 
-     # Returns a user's status feed.
+     # Returns a users status feed.
     def feed
         following_ids_subselect = "SELECT followed_id FROM relationships WHERE  follower_id = :user_id"
         Micropost.where("user_id IN (#{following_ids_subselect}) OR user_id = :user_id", user_id: id)

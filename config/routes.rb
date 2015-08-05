@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  default_url_options :host => "example.com"
+  # default_url_options :host => "example.com"
 
   resources :users do
     member do

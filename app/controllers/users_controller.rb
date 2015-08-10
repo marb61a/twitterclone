@@ -68,7 +68,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
     
-    # Uses the before filters
+    # Uses the before_action filters
     
     # Confirms the correct user.
     def correct_user
